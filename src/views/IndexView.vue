@@ -174,7 +174,7 @@
         <loading style="margin-top: 2px" v-if="isLoading"></loading>
       </div>
     </div>
-    <Tspage v-if="tabList.length == 0"></Tspage>
+    <Tspage v-if="lanmus!= '' && tabList.length == 0"></Tspage>
     <!--  tabbar-->
     <!--    <NavigationTab :active="0"></NavigationTab>-->
   </div>
@@ -204,6 +204,7 @@ export default {
   },
   data() {
     return {
+      lanmus:'',
       searchValue: "",
       bannerList: [],
       classList: [],
@@ -438,6 +439,7 @@ export default {
     getFlashSaleList() {
       flashSaleList().then(res => {
         if (res.code == 200) {
+          this.lanmus  = res.data.lanmu
           res.data.product_class.forEach(item => {
             this.tabList.push(item)
           })
